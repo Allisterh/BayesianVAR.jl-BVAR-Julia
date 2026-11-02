@@ -40,7 +40,7 @@ function bvar_minnesota_prior(
         μ[i]   = mean(yₜ - βₖ .* xₜ);
         X      = [xₜ Ι];
         ε      = yₜ - X * [βₖ, μ[i]];
-        σ[i,i] = ε' * ε /length(yₜ);
+        σ[i,i] = sqrt(ε' * ε /length(yₜ)); # standard deviation, as in the dummies
         ϵ[:,i] = ε;
     end
 

@@ -38,9 +38,12 @@ function bvar_opt_hyperprior(
 
     for i = 1:length(p)
 
-        # Create the arrays for the estimation  of the likelihhod
-        x  = X_companion(Xm, p[i], intercept_c = true)' |> Array{Float64,2};
-        y  = Xm[p[i]+1:end,:];
+        # Create the arrays for the estimation  of the likelihhod. All lag
+        # lengths use the same sample, starting after the largest lag, otherwise
+        # the marginal likelihoods are computed on different data
+        Xp = Xm[maximum(p)+1-p[i]:end,:];
+        x  = X_companion(Xp, p[i], intercept_c = true)' |> Array{Float64,2};
+        y  = Xp[p[i]+1:end,:];
 
         # Compute value marginal likelihood for different value prior
         for j = 1:length(λ)

@@ -30,7 +30,7 @@ function bvar_marginal_likelihood(
 
     # Sample size (time t and variables k) and dof prior and posterior
     t,k = size(y)
-    v₀  = size(yₛ,1) 
+    v₀  = size(yₛ,1) - size(xₛ,2) # Tₛ - (kp+1): same for every lag length
     v₁  = v₀ + t    
 
     # Allocate memories
